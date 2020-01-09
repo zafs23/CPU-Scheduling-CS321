@@ -1,0 +1,90 @@
+****************
+* Assignment #2 
+* Class : CS 321 
+* Date : 09/26/2019
+* Name : Sajia Zafreen
+**************** 
+
+## OVERVIEW:
+
+  CPUScheduling is a simulation of CPU Scheduling using a priority queue. The priority queue 
+  PQueue class is implemented using a max-heap and a MaxHeap class is implemented using an array. 
+  Each node in the max-heap contains a process. The Process class implements Comparable interface 
+  so that the comparison between nodes in max-heap can be made by calling compareTo method.
+  The process generator generates a process randomly depending on the probability provided by the
+  user. The compareTo method compares the priority at first, if the priority is same then the arrival 
+  time is compared. In this CPU Scheduling simulation only one process can arriave or generate each 
+  time. 
+
+ ## INCLUDED FILES:
+ 
+ * Averager.java - source file
+ * CPUScheduling.java - source file
+ * MaxHeap.java - source file
+ * PQueue.java - source file
+ * Process.java - source file
+ * ProcessGenerator.java - source file
+ * README - this file
+ 
+ 
+ ## COMPILING AND RUNNING:
+ 
+   To get a CPU Scheduling Implementation first compile the CPUScheduling class.
+ 
+ $ javac CPUScheduling.java
+ 
+   Then run the compiled file 
+ 
+ $ java CPUScheduling <maxProcessTime> <maxPriorityLevel> <timeToIncrementPriority> <simulationTime> <processArrivalRate>
+   
+   Here the following definitions are represented :
+   
+   maxProcessTime: largest possible time units required to finish a process. That is,any process 
+   arrived will require at least 1 time unit and at most maxPriorityLevel time units to finish.
+
+   maxPriorityLevel: highest possible priority in this simulation. That is, a process can have a 
+   priority, ranging from 1, 2, . . . , maxPriorityLevel.
+
+   timeToIncrementPriority: if a process didn’t get any CPU time for this timeToIncrementPriority 
+   time units, the process’s priority will be increased by one.
+  
+   simulationTime: the total time units for the simulation.
+   processArrivalRate: using this rate to decide whether to generate a new process in each time unit.
+ 
+ 
+ 
+ 
+ ## PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+    
+   CPUScheduling class: Simulates the round robin CPU scheduling algorithm.
+   
+   Averager class: keeps track of the number of processes in the simulation and computes the
+   average turn around time. This class is completed.
+   
+   ProcessGenerator class: Randomly generates processes with a given probability. At beginning
+   of each time unit, whether a process will arrive is decided by the given probability. In 
+   addition, while generating a new process, both its priority and the required time units 
+   to finish the process are randomly generated within given ranges.
+   
+   Process class: Implements a process. It implements the compareTo method. Each process has a 
+   priority level and if the priority is same the arrival time is compared to implement the 
+   compareTo method. A process also has time remaining to finish, and arrival time.
+   
+   MaxHeap class: Implements a max-heap using an array. Each node in the max-heap contains a process.
+   PQueue class: Implements a priority queue using a max-heap.
+    
+ 
+ 
+ 
+ ## DISCUSSION:
+    
+    The first thing I did wrong was that I didn't use rear variable as the MaxHeap size. Rather, I  
+    used the array length to implement the maxHeapifyDown method. Thus I was getting null pointer 
+    exception. However,I realized my fault after debugging.
+    I changed my parent, left and right child index equation as my array started at index 0.
+    One thing I noticed when running the provided test is that the test script just assumes when my 
+    processGenerator generates a process. At first I implemented my query method incorrectly but the
+    test script didn't notice any error. However, I have updated my query method. I have used 0.1 to 
+    0.9 as probability to test my program. 
+ 
+ 
